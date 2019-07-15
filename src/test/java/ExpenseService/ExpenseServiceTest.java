@@ -62,7 +62,16 @@ class ExpenseServiceTest {
     @Test
     void should_throw_unexpected_project_exception_if_project_is_invalid() {
         // given
+        ProjectType projectType = ProjectType.UNEXPECTED_PROJECT_TYPE;
+        Project project = new Project(projectType,"Project C");
         // when
+        try {
+            ExpenseService.getExpenseCodeByProjectTypeAndName(project);
+        }catch (UnexpectedProjectTypeException e) {
+            e.getMessage();
         // then
+        Assertions.assertEquals("You enter invalid project type",e.getMessage());
+        }
+
     }
 }
